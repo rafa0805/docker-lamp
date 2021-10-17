@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: ./web
+    volumes:
+      - ./app:/var/www/html
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+  
+  db:
+    build: ./db
+    restart: always
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+
+volumes:
+  database: {}
